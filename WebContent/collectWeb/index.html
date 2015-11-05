@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<script type="text/javascript" src="../collectJs/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="../collectJs/index.js"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Court Batch Import</title>
+</head>
+<body>
+	<form id="frm">
+		<table>
+			<tr>
+				<!-- <td>
+					ID: <input type="text" name="objId"/>
+				</td>
+				<td>
+					Name: <input type="text" name="objName"/>
+				</td>
+				<td>
+					Remark: <input type="text" name="mark"/>
+				</td> -->
+				<td>
+					文件路径: <input type="text" name="objName" style="width:600px;"/>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3" align="center">
+					<input type="reset"/>
+					<input type="button" id="submits" value="提交">					
+				</td>
+			</tr>
+		</table>
+	</form>
+</body>
+
+<script type="text/javascript">
+
+ var qsData = {'searchWord':$("#searchWord").attr("value"),'currentUserId':$("#currentUserId").attr("value"),'conditionBean.pageSize':$("#pageSize").attr("value")};
+$.ajax({
+   async:false,
+   url: "http://192.168.0.15:8080/OdateRest/Odata.svc/",
+   type: "GET",
+   dataType: 'json',
+   timeout: 5000,
+   beforeSend: function(){
+   //jsonp 方式此方法不被触发.原因可能是dataType如果指定为jsonp的话,就已经不是ajax事件了
+   },
+   success: function (json) {//客户端jquery预先定义好的callback函数,成功获取跨域服务器上的json数据后,会动态执行这个callback函数
+  
+	   alert( JSON.stringify(json));     
+       //genDynamicContent(qsData,type,json);
+   },
+    complete: function(XMLHttpRequest, textStatus){
+   },
+   error: function(xhr){
+    //jsonp 方式此方法不被触发.原因可能是dataType如果指定为jsonp的话,就已经不是ajax事件了
+    //请求出错处理
+    alert("请求出错(请检查相关度网络状况.)"+xhr);
+   }
+}); 
+/*   $.get("http://192.168.0.15:8080/OdateRest/Odata.svc/",null,function(data){
+	 alert(data);
+ }); */
+</script>
+</html>

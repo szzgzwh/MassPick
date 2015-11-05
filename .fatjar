@@ -1,0 +1,14 @@
+#Fat Jar Configuration File
+#Fri Oct 30 18:49:39 CST 2015
+onejar.license.required=false
+manifest.classpath=
+manifest.removesigners=true
+onejar.checkbox=true
+jarname=F\:\\work\\WorkSpace_Eclipse\\WorkSpace_Eclipse\\ExtractionHtml_004.jar
+manifest.mergeall=true
+manifest.mainclass=cn.com.szgao.action.ExtractionHtml
+manifest.file=<createnew>
+jarname.isextern=true
+onejar.expand=
+excludes=
+includes=

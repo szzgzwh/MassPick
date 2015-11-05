@@ -1,0 +1,166 @@
+<?xml version="1.0" ?>
+<!DOCTYPE hibernate-mapping PUBLIC   
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	
+<hibernate-mapping package="cn.com.szgao.dto">
+	<!--用户表 -->
+	<class name="UserVO" table="USER_T">
+		<id name="userId" column="URL_ID">
+			<generator class="native"></generator>
+		</id>
+		<!-- 员工工号 -->
+		<property name="employeeNo" column="EMPLOYEE_NO"></property>
+		<!-- 员工姓名 -->
+		<property name="userName" column="USER_NAME"></property>
+		<!-- 性别 -->
+		<property name="sex" column="SEX"></property>
+		<!-- 邮箱地址 -->
+		<property name="email" column="EMAIL"></property>
+		<!-- 手机 -->
+		<property name="mobile" column="MOBILE"></property>
+		<!-- 部门 -->
+		<property name="department" column="DEPARTMENT"></property>
+		<!-- 创建时间 -->
+		<property name="createDate" column="CREATE_DATE"></property>		
+	</class>
+	
+	<!-- 提取URL -->
+	<class name="NetUrlVO" table="extract_url_t">
+		<id name="urlId" column="URL_ID" type="java.lang.String">
+    		<generator class="assigned"/> 
+		</id>		
+		<!-- URL -->
+		<property name="url" column="URL"></property>
+		<!-- url包起来的文本 -->
+		<property name="urlText" column="URL_TEXT"></property>
+		<!-- url是哪个网站的 -->
+		<property name="urlSource" column="URL_SOURCE"></property>
+		<!-- url状态 -->
+		<property name="urlState" column="URL_STATE"></property>
+		<!-- 创建时间 -->
+		<property name="createDate" column="CREATE_DATE"></property>
+		<!-- 创建人 -->
+		<many-to-one name="createUser" column="CREATE_USER" class="UserVO"/> 
+		<!-- 最后修改时间 -->
+		<property name="lastModifyDate" column="LAST_MODIFY_DATE"></property>
+		<!-- 最后修改人 -->
+		<many-to-one name="lastModifyUser" column="LAST_MODIFY_USER" class="UserVO"/> 
+		<!-- 父、子级URL关系表 -->
+		<set name="subUrl" table="URL_RELATION_T" cascade="save-update" inverse="false">  
+         	<key column="PARENT_URL_ID"/>  
+         	<many-to-many class="cn.com.szgao.dto.NetUrlVO" column="SUB_URL_ID"/>  
+  		</set>
+	</class>
+	
+	<!-- 公司 enterprise_t-->
+	<class name="CompanyVO" table="temp_t">
+		<id name="companyId" column="enterp_id">
+    		<generator class="native"/> 
+		</id>
+		<!-- 公司名称 -->
+		<property name="companyName" column="enterp_name"></property>		
+		<!-- 责任人 -->
+		<property name="responsiblePerson" column="responsible_person"></property>
+		<!-- 联系人 -->
+		<property name="contactPerson" column="contact_person"></property>
+		<!--法人  -->
+		<property name="legalPerson" column="legal_person"></property>
+		<!-- 职位 -->
+		<property name="occupPostion" column="occup_position"></property>
+		<!-- 行政区划 -->
+		<property name="compartment" column="compartment"></property>
+		<!-- 公司地址 -->
+		<property name="enterpAddress" column="enterp_address"></property>
+		<!-- 区号 -->
+		<property name="areaCode" column="area_code"></property>
+		<!-- 公司电话 -->
+		<property name="enterpTell" column="enterp_tell"></property>
+		<!-- 公司分机 -->
+		<property name="enterpExten" column="enterp_extension"></property>
+		<!-- 公司传真 -->
+		<property name="enterpFax" column="enterp_fax"></property>
+		<!-- 公司移动号码 -->
+		<property name="enterpMobile" column="enterp_mobile"></property>
+		<!-- 邮政编码 -->
+		<property name="postCode" column="postcode"></property>
+		<!-- 公司邮箱 -->
+		<property name="enterpEmail" column="enterp_email"></property>
+		<!-- 公司URL -->
+		<property name="enterpUrl" column="enterp_url"></property>
+		<!-- 经营范围 -->
+		<property name="manageScope" column="manage_scope"></property>		
+		<!-- 经营产品 -->
+		<property name="manageProduct" column="manage_product"></property>
+		<!-- 主营行业 -->
+		<property name="manageTrade" column="manage_trade"></property>
+		<!-- 行业代码 -->
+		<property name="industryCode" column="industry_code"></property>
+		<!-- 经济代码-->
+		<property name="economicCode" column="economic_code"></property>
+		<!-- 股份控制情况 -->
+		<property name="controlStake" column="control_stake"></property>
+		<!-- 隶属关系 -->
+		<property name="subordRelation" column="subord_relation"></property>
+		<!-- 公司开业时间 -->
+		<property name="openDate" column="open_date"></property>
+		<!-- 注册日期 -->
+		<property name="registDate" column="regist_date"></property>
+		<!-- 公司经营状态 -->
+		<property name="manageState" column="manage_state"></property>
+		<!-- 会计制度  -->
+		<property name="accountSystem" column="account_system"></property>
+		<!-- 机构类型 -->
+		<property name="orgType" column="org_type" ></property>
+		<!-- 注册资金 -->
+		<property name="registCapital" column="regist_capital"></property>
+		<!-- 年收入 -->
+		<property name="yearRurnover" column="year_turnover"></property>
+		<!--营业收入  -->
+		<property name="operationRevenue" column="operation_revenue"></property>
+		<!-- 总资产 -->
+		<property name="totalAssets" column="total_assets"></property>
+		<!-- 职工人数 -->
+		<property name="employeeAmount" column="employee_amount"></property>
+		<!-- 公司简介 -->
+		<property name="briefIntroduct" column="brief_introduct"></property>
+		<!-- 经营模式 -->
+		<property name="manageModel" column="manage_model"></property>
+		<!-- 经济类型 -->
+		<property name="economicType" column="economic_type"></property>
+		<!-- 注册地址 -->
+		<property name="registAddress" column="regist_address"></property>
+		<!-- 经营地址 -->
+		<property name="manageAddress" column="manage_address"></property>
+		<!-- 主要市场 -->
+		<property name="mainMarke" column="main_market"></property>
+		<!-- 经营品牌 -->
+		<property name="manageBrand" column="manage_brand"></property>
+		<!-- 主要客户 -->
+		<property name="mainCustom" column="main_custom"></property>
+		<!-- 管理体系 -->
+		<property name="manageSystem" column="manage_system"></property>
+		<!-- 银行资金账户 -->
+		<property name="bankAccount" column="bank_account"></property>
+		<!-- 银行名称 -->
+		<property name="bankName" column="bank_name"></property>
+		<!-- 是否OEM -->
+		<property name="oemIs" column="oem_is"></property>
+		<!-- 研发人数 -->
+		<property name="developAmount" column="develop_amount"></property>
+		<!-- 厂房面积 -->
+		<property name="factoryArea" column="factory_area"></property>
+		<!-- 质量管控 -->
+		<property name="qualityControl" column="quality_control"></property>
+		<!-- 月产量 -->
+		<property name="monthOutput" column="month_output"></property>
+		<!-- 信用等级 -->
+		<property name="creditRat" column="credit_rating"></property>
+		<!-- 年进口量 -->
+		<property name="importAmount" column="import_amount"></property>
+		<!-- 年出口额 -->
+		<property name="outAmount" column="out_amount"></property>
+		<!--诚信类型  -->
+		<property name="credibilityType" column="credibility_type"></property>
+	</class>
+</hibernate-mapping>
